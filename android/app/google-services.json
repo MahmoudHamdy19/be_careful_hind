@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "790835494082",
+    "firebase_url": "https://be-careful-hind-default-rtdb.firebaseio.com",
+    "project_id": "be-careful-hind",
+    "storage_bucket": "be-careful-hind.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:790835494082:android:694ad6ad2d5aa045e58f5b",
+        "android_client_info": {
+          "package_name": "com.be_careful_hind.be_careful_hind"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdcGCqRcgdBWmqC0kvS6MKiPYM4CSDoiQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
