@@ -1,22 +1,37 @@
 workflows:
   ios-build:
-    name: iOS Build
+    name: iOS Release Build
     environment:
       flutter: stable
       xcode: latest
     scripts:
-      - name: Set iOS deployment version to 13.0
+      - name: Ensure iOS folder is configured correctly
         script: |
+          flutter clean
+          flutter pub get
+
+          # Check if Podfile exists, if not create one using Flutter
+          if [ ! -f ios/Podfile ]; then
+            flutter build ios --release --no-codesign || true
+          fi
+
+          # Force iOS deployment target to 13.0
           cd ios
-          if [ -f Podfile ]; then
-            sed -i '' 's/^#\? *platform :ios.*/platform :ios, '\''13.0'\''/' Podfile
+          if grep -q "platform :ios" Podfile; then
+            sed -i '' 's/platform :ios.*/platform :ios, '\''13.0'\''/' Podfile
           else
-            echo "platform :ios, '13.0'" > Podfile
+            echo "platform :ios, '13.0'" | cat - Podfile > temp && mv temp Podfile
           fi
           cd ..
-      - name: Install dependencies
-        script: flutter pub get
-      - name: Build IPA
+          
+      - name: Install pods
+        script: |
+          cd ios
+          pod install
+          cd ..
+
+      - name: Build iOS app
         script: flutter build ios --release --no-codesign
+
     artifacts:
       - build/ios/ipa/*.ipa
