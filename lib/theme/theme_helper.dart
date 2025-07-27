@@ -95,7 +95,7 @@ class ThemeHelper {
           padding: EdgeInsets.zero,
         ),
       ),
-      dialogTheme:DialogTheme(
+      dialogTheme:DialogThemeData(
         titleTextStyle: TextStyle(
           fontSize: 24.fSize,
           fontFamily: 'Changa',
@@ -118,7 +118,7 @@ class ThemeHelper {
           foregroundColor: ColorSchemes.primaryColorScheme.secondaryContainer
         )
       ),
-      tabBarTheme: TabBarTheme(
+      tabBarTheme: TabBarThemeData(
         dividerColor: Colors.black26
       ),
       floatingActionButtonTheme: FloatingActionButtonThemeData(

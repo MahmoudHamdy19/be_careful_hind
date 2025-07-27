@@ -1,17 +1,19 @@
 import 'package:be_careful_hind/core/constants/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:keep_screen_on/keep_screen_on.dart';
 import 'core/app_export.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'core/utils/ttsservice.dart';
 import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await TTSService.init(); // Initialize TTS once
+  KeepScreenOn.turnOn();
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+
   runApp(MyApp());
 }
 

@@ -5,7 +5,6 @@ import 'package:be_careful_hind/data/models/Radar_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:geocoding/geocoding.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 abstract class RemoteDataSource {
   Future<Either<Failure, void>> addRadar(RadarModel radar);
@@ -111,7 +110,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
 
   @override
   void autoAddRadarS() async{
-     for (int i = 0; i < coordinates.length; i++) {
+    /* for (int i = 0; i < coordinates.length; i++) {
       var radar = RadarModel();
       radar.geoPoint = GeoPoint(coordinates[i].latitude, coordinates[i].longitude);
       radar.name = 'Radar ${i + 1}';
@@ -133,9 +132,10 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       });
       radar.speed = 90.0 ;
       await addRadar(radar);
-    }
+    }*/
   }
 }
+/*
 final List<LatLng> coordinates = [
   LatLng(28.3893667, 36.4494167),
   LatLng(28.3670833, 36.4687),
@@ -159,4 +159,4 @@ final List<LatLng> coordinates = [
   LatLng(28.3898333, 36.5841333),
   LatLng(28.3843333, 36.5914667),
   LatLng(28.4023889, 36.5936944),
-];
+];*/

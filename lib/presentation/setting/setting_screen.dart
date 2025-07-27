@@ -18,7 +18,7 @@ class SettingScreen extends StatelessWidget {
               InkWell(
                 onTap: () {
                   print('object');
-                  Get.bottomSheet(Get.find<CarNavigationController>().bottomSheet());
+                  Get.bottomSheet(_buildRadarBottomSheet());
                 },
                 child: Container(
                   height: 120,
@@ -231,6 +231,22 @@ class SettingScreen extends StatelessWidget {
                         Image.asset(ImageConstant.mic, height: 50.0),
                       ],
                     ),
+                    Align(
+                      alignment: Alignment.center,
+                      child: ElevatedButton(onPressed: () {
+                        Get.find<CarNavigationController>().playRadarAlertSound();
+                      }, child: Text('Test Sounde'),
+                      style: ButtonStyle(
+                        padding: MaterialStateProperty.all(EdgeInsets.all(20.0)),
+                        backgroundColor:  MaterialStateProperty.all(Colors.white),
+                        foregroundColor: MaterialStateProperty.all(theme.primaryColor),
+                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18.0),
+                          ),
+                        ),
+                       ),),
+                    )
                   ],
                 ),
               ),
@@ -240,4 +256,93 @@ class SettingScreen extends StatelessWidget {
       ),
     );
   }
+
+  Widget _buildRadarBottomSheet()=> Directionality(
+    textDirection: TextDirection.rtl,
+    child: Container(
+      color: theme.primaryColor.withAlpha(200),
+      child: Stack(
+        alignment: Alignment.bottomLeft,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: ListView.separated(
+              itemCount: Get.find<CarNavigationController>().radars.length,
+              shrinkWrap: true,
+              itemBuilder:
+                  (context, index) => Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.radar,
+                        color: Colors.orangeAccent,
+                        size: 24,
+                      ),
+                      SizedBox(width: 8),
+                      Text(
+                        'الرادار: ${Get.find<CarNavigationController>().radars[index].name}',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 10),
+                  Row(
+                    children: [
+                      Icon(Icons.map, color: Colors.orangeAccent, size: 24),
+                      SizedBox(width: 8),
+                      Text(
+                        'المسافة: ${Get.find<CarNavigationController>().radars[index].distance?.round()} كم',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 10),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.speed,
+                        color: Colors.orangeAccent,
+                        size: 24,
+                      ),
+                      SizedBox(width: 8),
+                      Text(
+                        'السرعة المسموحة: ${Get.find<CarNavigationController>().radars[index].speed} كم/ساعة',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              separatorBuilder:
+                  (context, index) =>
+                  Divider(color: Colors.white, height: 20.0),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: FloatingActionButton(
+              backgroundColor: Colors.white,
+              child: Icon(Icons.close, color: theme.primaryColor),
+              onPressed: () => Get.back(),
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
 }
