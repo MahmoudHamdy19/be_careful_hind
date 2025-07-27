@@ -45,5 +45,39 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSLocationWhenInUseUsageDescription</key>
+    <string>This app needs access to your location for navigation purposes.</string>
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>This app needs access to your location in the background for tracking.</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>This app needs background location access for continuous tracking.</string>
+    <key>UIBackgroundModes</key>
+    <array>
+        <string>location</string>
+    </array>
+    <key>UIBackgroundModes</key>
+    <array>
+        <string>fetch</string>
+        <string>location</string>
+        <string>processing</string>
+    </array>
+    <key>NSCameraUsageDescription</key>
+    <string>This app needs camera access for certain features.</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>This app needs microphone access for audio features.</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>This app needs photo library access for uploading images.</string>
+    <key>NSLocationUsageDescription</key>
+    <string>This app needs location access for navigation.</string>
+    <key>NSMotionUsageDescription</key>
+    <string>This app needs motion sensor access for compass functionality.</string>
+    <key>UIBackgroundModes</key>
+    <array>
+        <string>remote-notification</string>
+    </array>
+    <key>UIBackgroundModes</key>
+    <array>
+        <string>audio</string>
+    </array>
 </dict>
 </plist>
