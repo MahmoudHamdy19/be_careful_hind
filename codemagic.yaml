@@ -5,17 +5,19 @@ workflows:
       flutter: stable
       xcode: latest
     scripts:
-      - name: Ensure iOS folder is configured correctly
+      - name: Clean and get Flutter dependencies
         script: |
           flutter clean
           flutter pub get
 
-          # Check if Podfile exists, if not create one using Flutter
+      - name: Generate Podfile if missing
+        script: |
           if [ ! -f ios/Podfile ]; then
             flutter build ios --release --no-codesign || true
           fi
 
-          # Force iOS deployment target to 13.0
+      - name: Set iOS minimum deployment target to 13.0
+        script: |
           cd ios
           if grep -q "platform :ios" Podfile; then
             sed -i '' 's/platform :ios.*/platform :ios, '\''13.0'\''/' Podfile
@@ -23,8 +25,8 @@ workflows:
             echo "platform :ios, '13.0'" | cat - Podfile > temp && mv temp Podfile
           fi
           cd ..
-          
-      - name: Install pods
+
+      - name: Install CocoaPods dependencies
         script: |
           cd ios
           pod install
